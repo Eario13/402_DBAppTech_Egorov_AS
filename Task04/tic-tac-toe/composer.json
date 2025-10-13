@@ -1,6 +1,6 @@
 {
     "name": "eario13/tic-tac-toe",
-    "description": "Tic-tac-toe CLI game without database (Task03)",
+    "description": "Tic-tac-toe CLI game with database (Task04)",
     "type": "project",
     "require": {
         "php": ">=8.0",

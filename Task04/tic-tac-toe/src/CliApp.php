@@ -4,7 +4,9 @@ namespace Eario13\TicTacToe;
 
 use cli\Arguments;
 use cli\Streams;
-use Eario13\TicTacToe\Database\DatabaseManager; // Добавляем use
+use Eario13\TicTacToe\Database\DatabaseManager;
+
+// Добавляем use
 
 class CliApp
 {
@@ -109,7 +111,7 @@ class CliApp
         $game->run();
     }
 
-     private function listGames(): void
+    private function listGames(): void
     {
         Streams::line('Список сохраненных игр:');
         $games = $this->dbManager->getAllGames();
@@ -121,24 +123,24 @@ class CliApp
 
         // Определяем ширину столбцов для более читаемого вывода
         $colWidths = [
-            'ID' => 4,
-            'Размер' => 8,
-            'Игрок X' => 18,       // Увеличено с 15 до 18
-            'Игрок O' => 18,       // Увеличено с 15 до 18
-            'Победитель' => 12,    // Можно оставить 12, или увеличить до 14 для "Компьютер"
-            'Ничья' => 7,
-            'Начало' => 20
+           'ID' => 4,
+           'Размер' => 8,
+           'Игрок X' => 18,       // Увеличено с 15 до 18
+           'Игрок O' => 18,       // Увеличено с 15 до 18
+           'Победитель' => 12,    // Можно оставить 12, или увеличить до 14 для "Компьютер"
+           'Ничья' => 7,
+           'Начало' => 20
         ];
 
         // Строка заголовков
         $header =
-            str_pad('ID', $colWidths['ID']) . ' | ' .
-            str_pad('Размер', $colWidths['Размер']) . ' | ' .
-            str_pad('Игрок X', $colWidths['Игрок X']) . ' | ' .
-            str_pad('Игрок O', $colWidths['Игрок O']) . ' | ' .
-            str_pad('Победитель', $colWidths['Победитель']) . ' | ' .
-            str_pad('Ничья', $colWidths['Ничья']) . ' | ' .
-            str_pad('Начало', $colWidths['Начало']);
+           str_pad('ID', $colWidths['ID']) . ' | ' .
+           str_pad('Размер', $colWidths['Размер']) . ' | ' .
+           str_pad('Игрок X', $colWidths['Игрок X']) . ' | ' .
+           str_pad('Игрок O', $colWidths['Игрок O']) . ' | ' .
+           str_pad('Победитель', $colWidths['Победитель']) . ' | ' .
+           str_pad('Ничья', $colWidths['Ничья']) . ' | ' .
+           str_pad('Начало', $colWidths['Начало']);
         Streams::line($header);
 
         // Разделительная линия
@@ -163,7 +165,12 @@ class CliApp
 
             $draw = $game['draw'] ? 'Да' : 'Нет';
 
-            $mbPad = function (string $input, int $length, string $pad_string = ' ', int $pad_type = STR_PAD_RIGHT): string {
+            $mbPad = function (
+                string $input,
+                int $length,
+                string $pad_string = ' ',
+                int $pad_type = STR_PAD_RIGHT
+            ): string {
                 $diff = $length - mb_strlen($input);
                 if ($diff <= 0) {
                     return $input;
@@ -171,8 +178,7 @@ class CliApp
                 return $input . str_repeat($pad_string, $diff);
             };
 
-            $line =
-                $mbPad((string)$game['id'], $colWidths['ID']) . ' | ' .
+            $line = $mbPad((string)$game['id'], $colWidths['ID']) . ' | ' .
                 $mbPad($game['board_size'] . 'x' . $game['board_size'], $colWidths['Размер']) . ' | ' .
                 $mbPad($game['player_x_name'], $colWidths['Игрок X']) . ' | ' .
                 $mbPad($game['player_o_name'], $colWidths['Игрок O']) . ' | ' .
@@ -205,7 +211,10 @@ class CliApp
 
         Streams::line('Начинаем повтор игры ' . $gameId . ' (' . $boardSize . 'x' . $boardSize . ')');
         Streams::line('Игрок X: ' . $gameDetails['player_x_name'] . ', Игрок O: ' . $gameDetails['player_o_name']);
-        Streams::line('Победитель: ' . ($gameDetails['winner'] ?? 'Неизвестно') . ', Ничья: ' . ($gameDetails['draw'] ? 'Да' : 'Нет'));
+        Streams::line(
+            'Победитель: ' . ($gameDetails['winner'] ?? 'Неизвестно') .
+            ', Ничья: ' . ($gameDetails['draw'] ? 'Да' : 'Нет')
+        );
         Streams::line('');
 
         $moveDelay = 1; // Задержка в секундах между ходами

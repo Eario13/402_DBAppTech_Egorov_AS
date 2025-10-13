@@ -4,7 +4,9 @@ namespace Eario13\TicTacToe;
 
 use cli\Streams;
 use cli\Arguments; // arguments больше не нужен в Game, но оставим для примера
-use Eario13\TicTacToe\Database\DatabaseManager; // Добавляем use
+use Eario13\TicTacToe\Database\DatabaseManager;
+
+// Добавляем use
 
 class Game
 {

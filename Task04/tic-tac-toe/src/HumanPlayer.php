@@ -13,7 +13,7 @@ class HumanPlayer extends Player
     public function makeMove(Board $board): array
     {
         while (true) {
-            echo $this->name . ' ('.$this->symbol.'), введите ваш ход (строка,столбец), например, 1,1: ';
+            echo $this->name . ' (' . $this->symbol . '), введите ваш ход (строка,столбец), например, 1,1: ';
             $input = trim(fgets(STDIN));
             $coordinates = array_map('trim', explode(',', $input));
 

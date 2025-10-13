@@ -60,7 +60,8 @@ class DatabaseManager
     public function createGame(int $boardSize, string $playerXName, string $playerOName): int
     {
         $stmt = $this->pdo->prepare(
-            "INSERT INTO games (board_size, player_x_name, player_o_name) VALUES (:board_size, :player_x_name, :player_o_name)"
+            "INSERT INTO games (board_size, player_x_name, player_o_name) VALUES " .
+            "(:board_size, :player_x_name, :player_o_name)"
         );
         $stmt->execute([
             ':board_size' => $boardSize,
@@ -73,7 +74,8 @@ class DatabaseManager
     public function recordMove(int $gameId, string $playerSymbol, int $row, int $col, int $moveNumber): void
     {
         $stmt = $this->pdo->prepare(
-            "INSERT INTO moves (game_id, player_symbol, row, col, move_number) VALUES (:game_id, :player_symbol, :row, :col, :move_number)"
+            "INSERT INTO moves (game_id, player_symbol, row, col, move_number) VALUES " .
+            "(:game_id, :player_symbol, :row, :col, :move_number)"
         );
         $stmt->execute([
             ':game_id' => $gameId,
@@ -98,8 +100,22 @@ class DatabaseManager
 
     public function getAllGames(): array
     {
-        $stmt = $this->pdo->query("SELECT * FROM games ORDER BY start_time DESC");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->query(
+            'SELECT id, board_size, player_x_name, player_o_name, winner, draw, start_time ' .
+            'FROM games ORDER BY start_time DESC'
+        );
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getGameDetails(int $gameId): ?array
+    {
+        $stmt = $this->pdo->prepare(
+            'SELECT id, board_size, player_x_name, player_o_name, winner, draw, start_time ' .
+            'FROM games WHERE id = ?'
+        );
+        $stmt->execute([$gameId]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result ?: null;
     }
 
     public function getGameMoves(int $gameId): array
@@ -107,13 +123,5 @@ class DatabaseManager
         $stmt = $this->pdo->prepare("SELECT * FROM moves WHERE game_id = :game_id ORDER BY move_number ASC");
         $stmt->execute([':game_id' => $gameId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getGameDetails(int $gameId): ?array
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM games WHERE id = :game_id");
-        $stmt->execute([':game_id' => $gameId]);
-        $game = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $game ?: null;
     }
 }
