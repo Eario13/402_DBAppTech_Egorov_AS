@@ -1,0 +1,13 @@
+{
+    "name": "task08/tic-tac-toe-spa",
+    "description": "Tic-Tac-Toe SPA with SQLite backend",
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
