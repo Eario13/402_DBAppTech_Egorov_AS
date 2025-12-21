@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крестики-нолики (Task09)</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Крестики-нолики (Slim)</h1>
+        </header>
+
+        <main>
+            <div class="controls">
+                <h2>Меню</h2>
+                <div class="form-group">
+                    <label for="player-name">Ваше имя:</label>
+                    <input type="text" id="player-name" value="Игрок 1" placeholder="Введите имя">
+                </div>
+                <div class="form-group">
+                    <label for="board-size">Размер поля:</label>
+                    <select id="board-size">
+                        <option value="3" selected>3x3</option>
+                        <option value="4">4x4</option>
+                        <option value="5">5x5</option>
+                        <option value="6">6x6</option>
+                        <option value="7">7x7</option>
+                        <option value="8">8x8</option>
+                        <option value="9">9x9</option>
+                        <option value="10">10x10</option>
+                    </select>
+                </div>
+                <div class="buttons">
+                    <button id="new-game-btn" class="primary-btn">Новая игра</button>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <h2 id="status-text">Добро пожаловать!</h2>
+                <div id="game-board"></div>
+            </div>
+
+            <div class="history">
+                <h2>База данных</h2>
+                <button id="list-games-btn" class="secondary-btn">Список партий (DB)</button>
+                <div id="games-list" style="display: none;"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Лабораторная работа №9. SPA с Slim Framework.</p>
+        </footer>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

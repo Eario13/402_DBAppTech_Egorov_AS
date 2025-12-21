@@ -1,0 +1,13 @@
+{
+    "name": "task09/tic-tac-toe",
+    "description": "Tic-tac-toe SPA with Slim framework",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "slim/slim": "^4.0",
+        "slim/psr7": "^1.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
